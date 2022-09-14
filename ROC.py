@@ -36,20 +36,20 @@ A = A.reshape((A.shape[0], N_PART_PER_JET, N_FEAT))
 
 # Second Dataset
 
-with h5py.File("Datasets/testingDataStPUPPI_1.h5", "r") as hf:
-   PUPPIdataset = hf["Testing Data"][:]
-with h5py.File("Datasets/testingDataqcdPUPPI.h5", "r") as hf:
-    PUPPIdatasetQCD = hf["qcdPUPPI/Testing Data"][:]
+#with h5py.File("Datasets/testingDataStPUPPI_1.h5", "r") as hf:
+#   PUPPIdataset = hf["Testing Data"][:]
+#with h5py.File("Datasets/testingDataqcdPUPPI.h5", "r") as hf:
+ #   PUPPIdatasetQCD = hf["qcdPUPPI/Testing Data"][:]
 
 #with h5py.File("/data/t3home000/aidandc/testingDataHHThreeV.h5", "r") as hf:
 #    dataset1 = hf["Testing Data"][:]
-PUPPIdataset = np.concatenate((PUPPIdataset,PUPPIdatasetQCD))
-np.random.shuffle(PUPPIdataset)
+#PUPPIdataset = np.concatenate((PUPPIdataset,PUPPIdatasetQCD))
+#np.random.shuffle(PUPPIdataset)
 
-A1 = PUPPIdataset[:, 0 : len(PUPPIdataset[0]) - 1]
-b1 = PUPPIdataset[:, len(PUPPIdataset[0]) - 1]
+#A1 = PUPPIdataset[:, 0 : len(PUPPIdataset[0]) - 1]
+#b1 = PUPPIdataset[:, len(PUPPIdataset[0]) - 1]
 
-A1 = A1.reshape((A1.shape[0], N_PART_PER_JET, N_FEAT))
+#A1 = A1.reshape((A1.shape[0], N_PART_PER_JET, N_FEAT))
 # Third Dataset
 #with h5py.File("/data/t3home000/aidandc/testingDataHHFiveV.h5", "r") as hf:
 #    dataset2 = hf["Testing Data"][:]
@@ -69,7 +69,7 @@ plt.plot([0, 1], [0, 1], "k--")
 
 # Load in respective model for the datasets
 model1 = load_model("L1JetTagModel.h5")
-model2 = load_model("PUPPIL1JetTagModel.h5")
+#model2 = load_model("PUPPIL1JetTagModel.h5")
 #model3 = load_model("modelThree.h5")
 
 # Creating ROC curves based on model predictions for each dataset
@@ -78,10 +78,10 @@ fpr_Ab, tpr_Ab, thresholds_Ab = roc_curve(b, Ab_pred_keras)
 auc_Ab = auc(fpr_Ab, tpr_Ab)
 plt.plot(fpr_Ab, tpr_Ab, label = "Pf, AUC={:.3f}".format(auc_Ab))#, label="dZ+dXY 1 Vertex (area={:.3f})".format(auc_Ab))
 
-Bc_pred_keras = model2.predict(A1).ravel()
-fpr_Bc, tpr_Bc, thresholds_Bc = roc_curve(b1, Bc_pred_keras)
-auc_Bc = auc(fpr_Bc, tpr_Bc)
-plt.plot(fpr_Bc, tpr_Bc, label="PUPPI, AUC={:.3f}".format(auc_Bc))
+#Bc_pred_keras = model2.predict(A1).ravel()
+#fpr_Bc, tpr_Bc, thresholds_Bc = roc_curve(b1, Bc_pred_keras)
+#auc_Bc = auc(fpr_Bc, tpr_Bc)
+#plt.plot(fpr_Bc, tpr_Bc, label="PUPPI, AUC={:.3f}".format(auc_Bc))
 
 #Cd_pred_keras = model3.predict(A2).ravel()
 #fpr_Cd, tpr_Cd, thresholds_Cd = roc_curve(b2, Cd_pred_keras)
