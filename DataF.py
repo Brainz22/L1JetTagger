@@ -221,16 +221,16 @@ def main(args):
     
     # Testing Data: Particle Inputs for each jet of Shape [...,141]
     with h5py.File("testingData" + str(args.tag) + ".h5", "w") as hf:
-        hf.create_dataset("/Testing Data", data=testArray)
+        hf.create_dataset("Testing Data", data=testArray)
     # Jet Data: Jet Features (pT, Eta, Phi, Mass) of each testing data jet of shape [...,4]
     with h5py.File("jetData" + str(args.tag) + ".h5", "w") as hf:
-        hf.create_dataset("/Jet Data", data=jetFullData)
+        hf.create_dataset("Jet Data", data=jetFullData)
     # Training Data: Particle Inputs for each jet of Shape [...,141]
     with h5py.File("trainingData" + str(args.tag) + ".h5", "w") as hf:
-        hf.create_dataset("/Training Data", data=trainArray)
+        hf.create_dataset("Training Data", data=trainArray)
     # Sample Data: Jet Features (pT, Eta, Phi, Mass) of each training data jet of shape [...,4]
     with h5py.File("sampleData" + str(args.tag) + ".h5", "w") as hf: 
-        hf.create_dataset("/Sample Data", data=trainingFullData)
+        hf.create_dataset("Sample Data", data=trainingFullData)
 
     end = time.time()
     print(str(end - start))
