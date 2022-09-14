@@ -67,8 +67,14 @@ x = Conv1D(
 )(x)
 #x = Dropout(0.3)(x)
 x = Conv1D(filters=50, kernel_size=1, activation="relu")(x)
-x = Flatten()(x)
-#x = Dropout(0.5)(x)
+
+# Tensor([10, 50]) -> Tensor([50])
+# x = (x[0,:] + x[1,:] + x[2,:] + ...)/10
+x = GlobalAveragePooling1D()(x)
+
+# Tensor([10, 50]) -> Tensor([500])
+# x = Flatten()(x)
+
 x = Dense(50, activation="relu")(x)
 #x = Dropout(0.3)(x)
 x = Dense(10, activation="relu")(x)
