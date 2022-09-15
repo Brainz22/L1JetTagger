@@ -74,6 +74,10 @@ def main(args):
 
     jetPartsArray = []
     jetDataArray = []
+    signalPartArray = []
+    missedSignalPartArray = []
+    partType = []
+        
 
     print("Beginning Jet Construction")
     start = time.time()
@@ -99,6 +103,7 @@ def main(args):
 
         # Loops through pf/pup candidates
         for i in range(len(obj)):
+            partType.append(obj[i][1]) #adding particle type
             jetPartList = []
             seedParticle = []
             if jetNum >= N_JET_MAX:  # Limited to 12 jets per event at maximum
@@ -198,6 +203,27 @@ def main(args):
                 jetDataArray.append((tempTLV.Pt(), tempTLV.Eta(), tempTLV.Phi(), tempTLV.M(), jetPartList[-1]))
                 jetNum += 1
 
+        
+
+        for n in range(len(tree.gen)): 
+            
+            tlv = 0 
+            if (
+                    (n not in bannedSignalParts)
+                    and (abs(tree.gen[n][1]) == SIGNAL_PDG_ID) 
+            ):
+                missedSignalParts += 1
+                tlv = tree.gen[n][0]
+                missedSignalPartArray.append((tlv.Pt(), tlv.Eta(), tlv.Phi(), tlv.M(),
+                                        tlv.Px(), tlv.Py(), tlv.Pz() ))
+
+            elif (n in bannedSignalParts):
+                tlv = tree.gen[n][0]
+                signalPartArray.append(( tlv.Pt(), tlv.Eta(), tlv.Phi(), tlv.M(),
+                                        tlv.Px(), tlv.Py(), tlv.Pz() ))
+                
+                
+                
     # Break dataset into training/testing data based on train/test split input
     splitIndex = int(float(args.trainPercent) / 100 * len(jetPartsArray))
     trainArray = jetPartsArray[:splitIndex]
@@ -217,8 +243,6 @@ def main(args):
 
     # Save datasets as h5 files
     
-    
-    
     # Testing Data: Particle Inputs for each jet of Shape [...,141]
     with h5py.File("testingData" + str(args.tag) + ".h5", "w") as hf:
         hf.create_dataset("Testing Data", data=testArray)
@@ -231,6 +255,10 @@ def main(args):
     # Sample Data: Jet Features (pT, Eta, Phi, Mass) of each training data jet of shape [...,4]
     with h5py.File("sampleData" + str(args.tag) + ".h5", "w") as hf: 
         hf.create_dataset("Sample Data", data=trainingFullData)
+    with h5py.File("signalPartsData" + ".h5", "w") as hf: 
+        hf.create_dataset("Data", data=signalPartArray)
+    with h5py.File("missedSignalPartsData" + ".h5", "w") as hf: 
+        hf.create_dataset("Data", data=missedSignalPartArray)
 
     end = time.time()
     print(str(end - start))
