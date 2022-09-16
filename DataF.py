@@ -260,11 +260,11 @@ def main(args):
     # Sample Data: Jet Features (pT, Eta, Phi, Mass) of each training data jet of shape [...,4]
     with h5py.File("sampleData" + str(args.tag) + ".h5", "w") as hf: 
         hf.create_dataset("Sample Data", data=trainingFullData)
-    with h5py.File("signalPartsData" + ".h5", "w") as hf: 
+    with h5py.File("signalPartsData" + str(args.tag) +".h5", "w") as hf: 
         hf.create_dataset("Data", data=signalPartArray)
-    with h5py.File("missedSignalPartsData" + ".h5", "w") as hf: 
+    with h5py.File("missedSignalPartsData"+ str(args.tag) + ".h5", "w") as hf: 
         hf.create_dataset("Data", data=missedSignalPartArray)
-    with h5py.File("ParticleTypes" + ".h5", "w") as hf: 
+    with h5py.File("ParticleTypes" + str(args.tag) + ".h5", "w") as hf: 
         hf.create_dataset("pdgID", data=partType)
         
 
