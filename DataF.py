@@ -259,7 +259,7 @@ def main(args):
         hf.create_dataset("Data", data=signalPartArray)
     with h5py.File("missedSignalPartsData" + ".h5", "w") as hf: 
         hf.create_dataset("Data", data=missedSignalPartArray)
-     with h5py.File("ParticleTypes" + ".h5", "w") as hf: 
+    with h5py.File("ParticleTypes" + ".h5", "w") as hf: 
         hf.create_dataset("pdgID", data=partType)
         
 
