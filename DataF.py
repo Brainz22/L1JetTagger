@@ -82,6 +82,9 @@ def main(args):
     print("Beginning Jet Construction")
     start = time.time()
     pbar = tqdm.tqdm(range(eventNum))
+    
+    missedSignalParts = 0
+    signalParts = 0
     for entryNum in pbar:
         pbar.set_description("Jets: " + str(len(jetPartsArray)) + "; Signal Jets: " + str(signalPartCount))
         tree.GetEntry(entryNum)
@@ -236,6 +239,8 @@ def main(args):
     print("Total No. of Matched Jets: " + str(signalPartCount))
     print("No. of Jets in Training Data: " + str(len(trainArray)))
     print("No. of Jets in Testing Data: " + str(len(testArray)))
+    print("No. of missed signal particles during reconstruction: " + str(missedSignalParts))
+    print("Total No. of signal particles: " + str(signalParts))
 
     # Final Check
     print("Debug that everything matches up in length")
