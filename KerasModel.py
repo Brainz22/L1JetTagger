@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow
 from keras.models import Model
-from tensorflow.keras.layers import Conv1D, Dense, Flatten, Input, Dropout
+from tensorflow.keras.layers import GlobalAveragePooling1D, Conv1D, Dense, Flatten, Input, Dropout
 
 #from DataF import N_FEAT, N_PART_PER_JET
 N_FEAT = 14
@@ -38,7 +38,7 @@ X = X.reshape((X.shape[0], N_PART_PER_JET, N_FEAT))
 thebins = np.linspace(0, 200, 100)
 bkgPts = []
 sigPts = []
-for i in range(len(y)):#len(sampleData)):
+for i in range(len(sampleData)):
     if y[i] == 1:
         sigPts.append(sampleData[i][0])
     if y[i] == 0:

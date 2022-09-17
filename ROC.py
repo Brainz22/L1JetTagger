@@ -13,9 +13,9 @@ import tensorflow
 # Establish the input and output data for each dataset, expanding dimensions for compatability with Conv1D layer input
 
 # First Dataset
-with h5py.File("/afs/cern.ch/user/r/russelld/CMSSW_12_4_1/src/testingDataStop_1_30.h5", "r") as hf:
+with h5py.File("testingDataStop_1_30.h5", "r") as hf:
     dataset = hf["Testing Data"][:]
-with h5py.File("/afs/cern.ch/user/r/russelld/CMSSW_12_4_1/src/testingDataQCD_30.h5", "r") as hf:
+with h5py.File("testingDataQCD_30.h5", "r") as hf:
     datasetQCD = hf["Testing Data"][:]
 
 #with h5py.File("trainingDataStop.h5", "r") as hf:
