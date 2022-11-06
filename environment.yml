@@ -16,3 +16,6 @@ dependencies:
     - scikit-learn
     - git+https://github.com/thesps/conifer.git
     - matplotlib
+    - h5py
+    - numpy
+  
