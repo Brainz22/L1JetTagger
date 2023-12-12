@@ -1,0 +1,86 @@
+Backend: Vivado
+ClockPeriod: 5
+HLSConfig:
+  LayerName:
+    global_average_pooling1d:
+      Precision:
+        result: fixed<16,6>
+      Trace: false
+    input_1:
+      Precision: fixed<10,3>
+      Trace: false
+    q_activation:
+      Precision:
+        result: ufixed<8,0,RND_CONV,SAT>
+      Trace: false
+    q_activation_1:
+      Precision:
+        result: ufixed<8,0,RND_CONV,SAT>
+      Trace: false
+    q_activation_2:
+      Precision:
+        result: ufixed<8,0,RND_CONV,SAT>
+      Trace: false
+    q_conv1d:
+      ConvImplementation: Pointwise
+      Precision:
+        bias: fixed<8,4>
+        result: fixed<16,6>
+        weight: fixed<8,4>
+      ReuseFactor: 2
+      Trace: false
+    q_conv1d_1:
+      ConvImplementation: Pointwise
+      Precision:
+        bias: fixed<8,4>
+        result: fixed<16,6>
+        weight: fixed<8,4>
+      ReuseFactor: 2
+      Trace: false
+    q_conv1d_1_linear:
+      Precision:
+        result: fixed<16,6>
+      Trace: false
+    q_conv1d_linear:
+      Precision:
+        result: fixed<16,6>
+      Trace: false
+    q_dense:
+      Precision:
+        bias: fixed<8,4>
+        result: fixed<16,6>
+        weight: fixed<8,4>
+      Trace: false
+    q_dense_1:
+      Precision:
+        bias: fixed<8,4>
+        result: fixed<16,6>
+        weight: fixed<8,4>
+      Trace: false
+    q_dense_1_linear:
+      Precision:
+        result: fixed<16,6>
+      Trace: false
+    q_dense_linear:
+      Precision:
+        result: fixed<16,6>
+      Trace: false
+    sigmoid:
+      Precision:
+        result: fixed<16,6>
+      Trace: false
+  Model:
+    BramFactor: 1000000000
+    Precision: fixed<16,6>
+    ReuseFactor: 1
+    Strategy: Latency
+    TraceOutput: false
+IOType: io_parallel
+InputData: null
+KerasModel: !keras_model 'qkmodel_1/hls4ml_prj/keras_model.h5'
+OutputDir: qkmodel_1/hls4ml_prj
+OutputPredictions: null
+Part: xcvu13p-flga2577-2-e
+ProjectName: myproject
+Stamp: AECAd5Cc
+Version: 1.0.0
